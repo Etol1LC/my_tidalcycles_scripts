@@ -1,0 +1,10 @@
+d1 $ vel (fast 2 )
+   $ pok'' "<14 4 6 8 0>"
+   $ s "<brk1:3 bd:3 mk:4>"
+   # cps "<0.6 1.2>"
+   # squizbus 2 (range 4 40 $ slow 2 $ sine)
+
+
+d2 $ cmb "brk1:5" $ brkk
+   $ s "[kk*2 sx:1, hh*4, brk2*2]"
+   # crushbus 1 (range 4 12 $ slow 4 $ sine )

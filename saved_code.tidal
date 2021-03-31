@@ -1,0 +1,121 @@
+d1 $ vel (slow 2)
+   $ pok "<10 8 0 2 18>"
+   $ s "hh*2 ux:3 kk*2 mk:4"
+   # cps "<1.2>"
+   # crushbus 1 (range 5 12 $ slow  2 $ sine)
+   # lpf 4900
+   # room 0.2
+
+d2 $ sometimesBy 0.1 ( const $ slow 2 $ s "brk1:3" # unit "c" # speed "-1")
+   $ mbrak $ s "[bd:2*2 <sx:3, sx:2>, hh*4, brk1*2?]"
+   # lesliebus 2 (range 0.2 2.4 $ fast 4 $ saw + 0.5)
+   # crushbus 3 (range 8 12 $ slow 4 $ sine)
+   # lpf (range  3800 4400 $ slow 2 $ sine )
+   # lpq 0.1
+   # room "0.1"
+
+
+------------
+
+
+
+
+
+
+
+
+d1 $ foldEvery [3,5,7] ( slow  2)
+   $ someCycles rev
+   $ pok' "<20 2 0 8 16 4>"
+   $ s "ux:1*2 ux:2 mk:4"
+   # room 0.2
+   # cps "<1.4 0.8 0.6>"
+   # crushbus 1 (range 4 12 $ slow 2 $ sine)
+
+
+d2 $ sometimesBy 0.1 (const $ slow 2 $ s "brk1:1" # unit "c" # speed "-1" )
+   $ s "[bd:2 sn:4, hh*4, brk1:2*2]"
+   # room 0.2
+   #  lpf 4400
+   # lesliebus 2 (range 0.2 0.8 $ fast 2 $ saw)
+   # crushbus 3 (range 4 12 $ slow 2 $ sine)
+
+
+
+
+-----------
+
+
+
+
+d1 $ vel (slow 2)
+   $ pok "<4 16 0 12>"
+   $ s "kk nx:1 sx:5 brk1:2"
+   # room 0.2
+   # cps "<1.2 0.7 0.9>"
+   # crushbus 2 (range 4 12 $ fast 2 $ sine)
+
+d2 $ cmb "brk1:2"
+   $ brkk
+   $ s "[kk*2 <sn:3 sx:2>, hh*4]"
+   # shape 0.5
+   # room 0.2
+   # lesliebus 1 (range 0.2 2.6 $ fast 2 $ saw)
+
+
+
+---------------
+
+
+
+d1 $ vel (fast 2 )
+   $ pok' "<20 0 4 2 16>"
+   $ s "<mk nx:2 nx:4 mk:4>"
+   #  cps "< 0.8>"
+   # crushbus 3 (range 4 14 $ slow 2 $ sine)
+   # orbit 1
+
+d2 $ cmb "brk1"
+   $ mbrak
+   $ s "[kk*2 sx:3, hh*4, brk1:1*2]"
+   # roombus 2 "0.1 0.2"
+   # squizbus 4 "<1 4>"
+   # shape 0.4
+   # orbit 2
+
+
+
+----------
+
+d3 $ vel (slow 2)
+   $ pok "<0 4 2 0 8 18>"
+   $ s "kk ux:2 mk:3 sx:1"
+  -- # cps "<1.2>"
+   # room 0.2
+
+d2 $ cmb "brk1:1"
+   $ s "[bd*2 <sn:1 sn:4>, hh*4?]"
+   # room 0.2
+   -- crushbus 1 (range 6 14 $ slow 2 $ sine)
+
+d1 $ vel (fast 2)
+   $ pok' "<0 12 4 8 16>"
+   $ s "<brk1 kk sx:5 ux:2>"
+   # cps "<1.1 0.6 1.2 0.8>"
+
+
+
+
+d1
+   $ grin "<12 4 9 20>" 4 "<128 >" (1/100)
+   $ s "<brk2:4 brk1:5>" # up "-4"
+
+
+d2 $ vel (slow 2)
+    $ pok' "<20 4 12 0 8>"
+   $ s "ux:3 mk:2 sx:4 bd:3"
+   # cps "<1.2 0.6 1.4 0.8 >"
+
+
+
+d3 $ mbrak $ s "[kk*2, ~ sn:2, hh*2]"

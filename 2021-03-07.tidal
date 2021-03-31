@@ -1,0 +1,7 @@
+d1 $ sometimesBy 0.1 (const $ slow 2 $ s "brk1" # speed "-0.8")
+$ sometimesBy 0.2 (jux ((fast 2 ) . (# speed "0.7"))) 
+$foldEvery [5, 7](rev) $every 5 (0.25 <~) $ every 4 (  brak)
+ $ whenmod 8 6 (fast 2 ) $ s "{kk*3?,  sn:1,< hh*4 hh*8?>}"
+# crushbus 1 (range 4 12 $ fast 2 $ sine)
+
+ hush

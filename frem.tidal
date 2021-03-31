@@ -1,0 +1,21 @@
+   d1 $ every 4 (jux ((rev) . (fast 2))) 
+   $ chop 64
+   $ fast 0.5 
+   $ s "[{bd*3, hh*8?},{sx:3*4?, ux:3*2}]"
+   # coarsebus 1 (range 8 32 $ fast 8 $ sine)
+   # krushbus 2 (range 0.5 1.2 $ slow 2 $ sine)
+
+
+   d2 $ every 5 (0.25 <~)
+   $  brak 
+   $ chop 64
+   $ s "kk(3,8 )"
+    # lpf 1300 # lpq 0.3
+    # delay 0.125 # delayfeedback 1.1
+
+d2 silence
+
+    d3 $ every 5 (brak)$ chop 64 $ fast 2  $ s "~ sn:4" # lpf 2300
+
+
+    hush

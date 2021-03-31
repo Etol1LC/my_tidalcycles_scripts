@@ -1,0 +1,139 @@
+let tim = unit "c" |+| speed 8
+    cas a p = stutWith 8 (a) ((|* gain 0.85)) $ p
+    sil = (const $ s "")
+    som a b c = stack [ s a, s b, s c]
+
+
+
+
+
+setcps = (140/60)
+-------------------one---------------
+
+d1 $ slow 2
+   $ every 3 (rev)
+   $ every 4 (jux (fast 2))
+   $ s "[{ sx*6?, gl*2}?, {kit2*2, hh*3}, {gl*3, kk*2}%<2 1>]"
+
+d1 silence
+
+d2 $ slow 2 $  every 4 (rev)
+$ sometimesBy 0.4 (1.25 ~>)
+   $ s "[{d17*3, nx*4}?, {sx*3}, {kit1*6?}%<1 2>]"
+   # n (run 4) # crush 8
+
+d2 silence
+
+d3 $ foldEvery [5,7] (1.25 <~) $ every 8 (jux (fast 2)) $ s "[{kk:2(3,8), brk1:3*3?},[~ <sx:2 sx:3*4?>],[<hh*16? ~ hh*32>]]"
+# gain 1
+# crushbus 1 (range 4 14 $ slow 2 $ sine)
+# speed (range 0.8 1.3 $ density 0.5 $ saw)
+
+d3 silence
+
+d4 $ every 4 (rev)
+   $ sometimesBy 0.2 (1.75 <~ )
+   $ s "[{nx*3, sx*2?, kit2*4}, {ven*2, kk*3}]"
+   # n (irand 8)
+   # lpf ( range 600 1800 $ slow 8 $ tri)
+   # crush "4 8"
+
+d5 $ every 4 (jux (rev))
+   $ s "[{kit2*3?, tok*2}, {mk*2, nx*6?}]"
+   #  n (irand 4)
+   # hpf "1900 13000" # pan rand
+
+
+d6 $ every 2 (fast 2)
+   $ sometimes (0.25 <~)
+   $ randcat [ s "brk1*8"
+   # n (run 16) # tim ,
+   s "brk4*8" # tim # n (irand 16)]
+
+d6 silence
+
+d7 $ s "[{brk2*3, kk*2}, {brk1*4, hh*12?}]"
+    # n (run 16)
+    # crush "4 8"
+    # lpf (range 500 4500 $ fast 4 $ saw )
+
+d8 $ sometimes (0.25 <~) $ every 4(fast 2) $ s "brk1*8" # n (irand 8) # tim
+
+d9 $ every 4 (fast 2 ) $ s "brk3*8" # n (irand 16) # tim # crush 2
+-----------------------
+
+d1 $ sometimes (1.75 <~) $ s "[{brk1*2, ~ brk4*3 ,kk*6? ~, brk1*1}]" # n "<0>"
+
+d2 $ sometimesBy 0.2  $ s "[{kk*3, ~ hh*12? ~}, {sx*3 ~, mk*6? ~}]" # n "<2 5>"
+
+
+--------------
+
+d1 $ foldEvery [4, 8] (rev)
+$ every 4 ( jux (fast  0.5))
+$ sometimes (fast 2) $ s "[{brk1:5, kk*4}?, {hh*3, mk:6*2}]"
+# n (density 3 $ run 8)
+# speed (slow 4 $ sine + 0.5)
+# crushbus 1 (range 4 8 $ slow 2 $ sine)
+# roombus 2 (range 0.2 0.3 $ density 4 $ sine)
+# delay 0.5
+# delayfeedbackbus 3 (slow 2 tri)
+
+d1 $ silence
+--------------
+
+d2 $ s "[{kk*3, hh*2, ~ mk*3?}, {nx*2, sx*4}]" # crushbus 1 (range 3 10 $ slow 8 $ sine)
+
+d2 silence
+--------------------
+
+d1 $ foldEvery [3, 8] (rev) $ every 5 ( 1.25 ~>) $ stack [ every 4 (stutWith 2 (0.125/2) (|* gain 0.8) . (|+ speed 1.2))
+$ s "[{kk*2, hh*4?, sx:4*2}, {mk*1, nx*3}]?" # crushbus 1 (range 4 10 $ slow 2 $ sine)
+# speed (range 0.8 1.4 $ slow 2 $ tri)
+# delay 0.1,
+ every 4 (jux (fast 0.5)) $ s "[{b17*2, mk:3*4?, sx:2*6?}?, {kk*4?, hh*2}]"  # coarsebus 2 (range 4 12 $ density 0.5 $ sine )
+# room 0.1 # delay 0.5 # delayfeedback 0.3
+]
+
+d1 silence
+------------------------
+
+
+d1 $ foldEvery [4, 12] (rev)
+$ every 5 ( 0.25 ~>)
+$ every 7 (jux (fast 2))
+$ stack [s "[{ux*2, taiko*3?, ~ nx*4?}, {kk*4?, hh*6?}?]"
+# lpf 1900
+# leslie 0.9
+# speed (range 0.6 1.6 $ slow 2 $ saw)
+# coarsebus 2 (range 2 22 $ density 4 $ tri + 0.5),
+every 4 (stutWith 2 (0.25) ((|* gain 0.9 ) . (# speed 1.2)) $ s "[{brk4*4?, hh:2*3?}, {~ kk*3?, mk:2*2}]"
+# crushbus 1 (range 4 12 $ fast 2 $ sine)
+# delay 0.5
+# lpf "800 2200"
+# lpq "0.3 0.5"
+# leslie 0.8
+# speed (range 0.6 2.4 $ fast 2 $ sine + 0.5)]
+
+hush
+
+
+d1 $ foldEvery [3,4] (rev) $ every 4 (stutWith 2 (0.25) ((|* gain 0.8) . (# speed (range 1 2.2 $ fast 2 $ saw))))
+$ every 5 (1.25 ~>)
+$ every 3 (|+ up "-24 -1 4 8")
+$ s "[{~ ux:3*3, hh*4?, sx:2*2}, {kk*3, brk1*2, mk*1 ~}]"
+# crushbus 1 (range 4 11 $ slow 4 $ sine)
+# speed (range 0.8 1.4 $ slow 2 $ tri)
+# lesliebus 2 "0.8 1.4 2.3 0.1"
+# delay 0.15
+# delayfeedback "0.25"
+
+
+
+d3 $ fast 2 $ s "[kk*2, ~ <sx:3>, hh*8?]"
+# speed 1
+# lpf 1900
+# lpq 0.4
+# crushbus 1 (range 3 12 $ slow 8 $ saw)
+
+hush
